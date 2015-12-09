@@ -1,0 +1,50 @@
+PREFIX ncit:<http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX roo:<http://www.cancerdata.org/roo/>
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>
+PREFIX icd:<http://purl.bioontology.org/ontology/ICD10/>
+PREFIX uo:<http://purl.obolibrary.org/obo/>
+PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>
+
+start = <PatientShape>
+
+<PatientShape> {
+    rdf:type (ncit:C16960),
+    roo:100018 @<GenderShape>,
+    roo:100020 @<DiseaseShape>,
+    roo:100000 @<AgeShape>,
+    roo:100039 IRI,
+    roo:100028 @<VitalStatusShape>,
+    roo:100026 @<SurvivalInfoShape>
+}
+
+<GenderShape> {
+    rdf:type (ncit:C28421),
+    rdf:type (ncit:C16576 ncit:C20197){1}
+}
+
+<DiseaseShape> {
+    rdf:type (icd:C20)
+}
+
+<AgeShape> {
+    rdf:type (ncit:C25150),
+    roo:100027 (uo:UO_0000036),
+    roo:100042 LITERAL
+    %js{ return (_.o.lex > 18) %}
+    %sparql{ . FILTER ( ?o > 18 ) %}
+}
+
+<VitalStatusShape> {
+    rdf:type (ncit:C37987 ncit:C28554){1}
+}
+
+<SurvivalInfoShape> {
+    rdf:type (roo:100014),
+    roo:100027 (uo:UO_0000035),
+    roo:100042 LITERAL
+    %js{ return (_.o.lex > 0) %}
+    %sparql{ . FILTER ( ?o > 0 ) %}
+}
