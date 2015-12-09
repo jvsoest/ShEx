@@ -26,7 +26,8 @@ start = <PatientShape>
 }
 
 <DiseaseShape> {
-    rdf:type (icd:C20)
+    rdf:type (icd:C20),
+	roo:100243 @<ClinicalTNMShape>
 }
 
 <AgeShape> {
@@ -48,3 +49,42 @@ start = <PatientShape>
     %js{ return (_.o.lex > 0) %}
     %sparql{ . FILTER ( ?o > 0 ) %}
 }
+
+<ClinicalTNMShape> {
+	rdf:type (ncit:C48881),
+	roo:100244 @<ClinTnmTShape>,
+	roo:100242 @<ClinTnmNShape>,
+	roo:100241 @<ClinTnmMShape>
+}
+
+<ClinTnmTShape> {
+	rdf:type (ncit:C48719 ncit:C48720 ncit:C48721 ncit:C48722 ncit:C48723 ncit:C48724 ncit:C48725 ncit:C48726 ncit:C48727 ncit:C48728 ncit:C48732 ncit:C48737 ncit:C48738){1}
+}
+
+<ClinTnmNShape> {
+	rdf:type (ncit:C48705 ncit:C48706 ncit:C48706 ncit:C48706 ncit:C48706 ncit:C48786 ncit:C48786 ncit:C48786 ncit:C48786 ncit:C48714 ncit:C48714 ncit:C48714 ncit:C48714 ncit:C48718){1}
+}
+
+<ClinTnmMShape> {
+	rdf:type (ncit:C48699 ncit:C48700 ncit:C48701){1}
+}
+
+<PathologicalTNMShape> {
+	rdf:type (ncit:C48739),
+	roo:100288 @<PathTnmTShape>,
+	roo:100286 @<PathTnmNShape>,
+	roo:100285 @<PathTnmMShape>
+}
+
+<PathTnmTShape> {
+	rdf:type (ncit:C48719 ncit:C48720 ncit:C48721 ncit:C48722 ncit:C48723 ncit:C48724 ncit:C48725 ncit:C48726 ncit:C48727 ncit:C48728 ncit:C48732 ncit:C48737 ncit:C48738){1}
+}
+
+<PathTnmNShape> {
+	rdf:type (ncit:C48705 ncit:C48706 ncit:C48706 ncit:C48706 ncit:C48706 ncit:C48786 ncit:C48786 ncit:C48786 ncit:C48786 ncit:C48714 ncit:C48714 ncit:C48714 ncit:C48714 ncit:C48718){1}
+}
+
+<PathTnmMShape> {
+	rdf:type (ncit:C48699 ncit:C48700 ncit:C48701){1}
+}
+
