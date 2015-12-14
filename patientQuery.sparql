@@ -118,7 +118,79 @@ SELECT ?PatientShape {
         } GROUP BY ?DiseaseShape }
         FILTER (?DiseaseShape_c1 = ?DiseaseShape_c2)
         OPTIONAL { ?DiseaseShape roo:100243 ?DiseaseShape_ClinicalTNMShape_ref0 . FILTER (true && (isIRI(?DiseaseShape_ClinicalTNMShape_ref0) || isBlank(?DiseaseShape_ClinicalTNMShape_ref0))) }
-        FILTER (?DiseaseShape_c1=0 || ?DiseaseShape_c1>=1&&?DiseaseShape_c1<=1)
+        { SELECT ?DiseaseShape (COUNT(*) AS ?DiseaseShape_c3) {
+          ?DiseaseShape roo:100287 ?o .
+        } GROUP BY ?DiseaseShape}
+        { SELECT ?DiseaseShape (COUNT(*) AS ?DiseaseShape_c4) {
+          ?DiseaseShape roo:100287 ?o . FILTER ((isIRI(?o) || isBlank(?o)))
+        } GROUP BY ?DiseaseShape}
+        FILTER (?DiseaseShape_c3 = ?DiseaseShape_c4)
+        { SELECT ?DiseaseShape (COUNT(*) AS ?DiseaseShape_c5) {
+            { SELECT ?DiseaseShape ?PathologicalTNMShape {
+              ?DiseaseShape roo:100287 ?PathologicalTNMShape . FILTER (true && (isIRI(?PathologicalTNMShape) || isBlank(?PathologicalTNMShape)))
+            } }
+
+            { SELECT ?PathologicalTNMShape {
+              ?PathologicalTNMShape a ?o . FILTER ((?o = ncit:C48739))
+            } GROUP BY ?PathologicalTNMShape HAVING (COUNT(*)=1)}
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c1) {
+              ?PathologicalTNMShape roo:100288 ?o .
+            } GROUP BY ?PathologicalTNMShape HAVING (COUNT(*)=1)}
+            { SELECT ?PathologicalTNMShape {
+              ?PathologicalTNMShape roo:100288 ?o . FILTER ((isIRI(?o) || isBlank(?o)))
+            } GROUP BY ?PathologicalTNMShape HAVING (COUNT(*)=1)}
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c2) {
+                { SELECT ?PathologicalTNMShape ?PathTnmTShape {
+                  ?PathologicalTNMShape roo:100288 ?PathTnmTShape . FILTER (true && (isIRI(?PathTnmTShape) || isBlank(?PathTnmTShape)))
+                } }
+
+                { SELECT ?PathTnmTShape {
+                  ?PathTnmTShape a ?o . FILTER ((?o = ncit:C48719 || ?o = ncit:C48720 || ?o = ncit:C48721 || ?o = ncit:C48722 || ?o = ncit:C48723 || ?o = ncit:C48724 || ?o = ncit:C48725 || ?o = ncit:C48726 || ?o = ncit:C48727 || ?o = ncit:C48728 || ?o = ncit:C48732 || ?o = ncit:C48737 || ?o = ncit:C48738))
+                } GROUP BY ?PathTnmTShape HAVING (COUNT(*)=1)}
+            } GROUP BY ?PathologicalTNMShape }
+            FILTER (?PathologicalTNMShape_c1 = ?PathologicalTNMShape_c2)
+            OPTIONAL { ?PathologicalTNMShape roo:100288 ?PathologicalTNMShape_PathTnmTShape_ref0 . FILTER (true && (isIRI(?PathologicalTNMShape_PathTnmTShape_ref0) || isBlank(?PathologicalTNMShape_PathTnmTShape_ref0))) }
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c3) {
+              ?PathologicalTNMShape roo:100286 ?o .
+            } GROUP BY ?PathologicalTNMShape}
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c4) {
+              ?PathologicalTNMShape roo:100286 ?o . FILTER ((isIRI(?o) || isBlank(?o)))
+            } GROUP BY ?PathologicalTNMShape}
+            FILTER (?PathologicalTNMShape_c3 = ?PathologicalTNMShape_c4)
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c5) {
+                { SELECT ?PathologicalTNMShape ?PathTnmNShape {
+                  ?PathologicalTNMShape roo:100286 ?PathTnmNShape . FILTER (true && (isIRI(?PathTnmNShape) || isBlank(?PathTnmNShape)))
+                } }
+
+                { SELECT ?PathTnmNShape {
+                  ?PathTnmNShape a ?o . FILTER ((?o = ncit:C48705 || ?o = ncit:C48706 || ?o = ncit:C48706 || ?o = ncit:C48706 || ?o = ncit:C48706 || ?o = ncit:C48786 || ?o = ncit:C48786 || ?o = ncit:C48786 || ?o = ncit:C48786 || ?o = ncit:C48714 || ?o = ncit:C48714 || ?o = ncit:C48714 || ?o = ncit:C48714 || ?o = ncit:C48718))
+                } GROUP BY ?PathTnmNShape HAVING (COUNT(*)=1)}
+            } GROUP BY ?PathologicalTNMShape }
+            FILTER (?PathologicalTNMShape_c3 = ?PathologicalTNMShape_c5)
+            OPTIONAL { ?PathologicalTNMShape roo:100286 ?PathologicalTNMShape_PathTnmNShape_ref0 . FILTER (true && (isIRI(?PathologicalTNMShape_PathTnmNShape_ref0) || isBlank(?PathologicalTNMShape_PathTnmNShape_ref0))) }
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c6) {
+              ?PathologicalTNMShape roo:100285 ?o .
+            } GROUP BY ?PathologicalTNMShape}
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c7) {
+              ?PathologicalTNMShape roo:100285 ?o . FILTER ((isIRI(?o) || isBlank(?o)))
+            } GROUP BY ?PathologicalTNMShape}
+            FILTER (?PathologicalTNMShape_c6 = ?PathologicalTNMShape_c7)
+            { SELECT ?PathologicalTNMShape (COUNT(*) AS ?PathologicalTNMShape_c8) {
+                { SELECT ?PathologicalTNMShape ?PathTnmMShape {
+                  ?PathologicalTNMShape roo:100285 ?PathTnmMShape . FILTER (true && (isIRI(?PathTnmMShape) || isBlank(?PathTnmMShape)))
+                } }
+
+                { SELECT ?PathTnmMShape {
+                  ?PathTnmMShape a ?o . FILTER ((?o = ncit:C48699 || ?o = ncit:C48700 || ?o = ncit:C48701))
+                } GROUP BY ?PathTnmMShape HAVING (COUNT(*)=1)}
+            } GROUP BY ?PathologicalTNMShape }
+            FILTER (?PathologicalTNMShape_c6 = ?PathologicalTNMShape_c8)
+            OPTIONAL { ?PathologicalTNMShape roo:100285 ?PathologicalTNMShape_PathTnmMShape_ref0 . FILTER (true && (isIRI(?PathologicalTNMShape_PathTnmMShape_ref0) || isBlank(?PathologicalTNMShape_PathTnmMShape_ref0))) }
+            FILTER (?PathologicalTNMShape_c1=0 && ?PathologicalTNMShape_c3=0 && ?PathologicalTNMShape_c6=0 || ?PathologicalTNMShape_c1>=1&&?PathologicalTNMShape_c1<=1 && ?PathologicalTNMShape_c3>=1&&?PathologicalTNMShape_c3<=1 && ?PathologicalTNMShape_c6>=1&&?PathologicalTNMShape_c6<=1)
+        } GROUP BY ?DiseaseShape }
+        FILTER (?DiseaseShape_c3 = ?DiseaseShape_c5)
+        OPTIONAL { ?DiseaseShape roo:100287 ?DiseaseShape_PathologicalTNMShape_ref0 . FILTER (true && (isIRI(?DiseaseShape_PathologicalTNMShape_ref0) || isBlank(?DiseaseShape_PathologicalTNMShape_ref0))) }
+        FILTER (?DiseaseShape_c1=0 && ?DiseaseShape_c3=0 || ?DiseaseShape_c1>=1&&?DiseaseShape_c1<=1 && ?DiseaseShape_c3>=1&&?DiseaseShape_c3<=1)
     } GROUP BY ?PatientShape }
     FILTER (?PatientShape_c3 = ?PatientShape_c5)
     OPTIONAL { ?PatientShape roo:100020 ?PatientShape_DiseaseShape_ref0 . FILTER (true && (isIRI(?PatientShape_DiseaseShape_ref0) || isBlank(?PatientShape_DiseaseShape_ref0))) }
@@ -156,50 +228,5 @@ SELECT ?PatientShape {
       ?PatientShape roo:100039 ?o . FILTER (isIRI(?o))
     } GROUP BY ?PatientShape}
     FILTER (?PatientShape_c9 = ?PatientShape_c10)
-    { SELECT ?PatientShape (COUNT(*) AS ?PatientShape_c11) {
-      ?PatientShape roo:100028 ?o .
-    } GROUP BY ?PatientShape}
-    { SELECT ?PatientShape (COUNT(*) AS ?PatientShape_c12) {
-      ?PatientShape roo:100028 ?o . FILTER ((isIRI(?o) || isBlank(?o)))
-    } GROUP BY ?PatientShape}
-    FILTER (?PatientShape_c11 = ?PatientShape_c12)
-    { SELECT ?PatientShape (COUNT(*) AS ?PatientShape_c13) {
-        { SELECT ?PatientShape ?VitalStatusShape {
-          ?PatientShape roo:100028 ?VitalStatusShape . FILTER (true && (isIRI(?VitalStatusShape) || isBlank(?VitalStatusShape)))
-        } }
-
-        { SELECT ?VitalStatusShape {
-          ?VitalStatusShape a ?o . FILTER ((?o = ncit:C37987 || ?o = ncit:C28554))
-        } GROUP BY ?VitalStatusShape HAVING (COUNT(*)=1)}
-    } GROUP BY ?PatientShape }
-    FILTER (?PatientShape_c11 = ?PatientShape_c13)
-    OPTIONAL { ?PatientShape roo:100028 ?PatientShape_VitalStatusShape_ref0 . FILTER (true && (isIRI(?PatientShape_VitalStatusShape_ref0) || isBlank(?PatientShape_VitalStatusShape_ref0))) }
-    { SELECT ?PatientShape (COUNT(*) AS ?PatientShape_c14) {
-      ?PatientShape roo:100026 ?o .
-    } GROUP BY ?PatientShape}
-    { SELECT ?PatientShape (COUNT(*) AS ?PatientShape_c15) {
-      ?PatientShape roo:100026 ?o . FILTER ((isIRI(?o) || isBlank(?o)))
-    } GROUP BY ?PatientShape}
-    FILTER (?PatientShape_c14 = ?PatientShape_c15)
-    { SELECT ?PatientShape (COUNT(*) AS ?PatientShape_c16) {
-        { SELECT ?PatientShape ?SurvivalInfoShape {
-          ?PatientShape roo:100026 ?SurvivalInfoShape . FILTER (true && (isIRI(?SurvivalInfoShape) || isBlank(?SurvivalInfoShape)))
-        } }
-
-        { SELECT ?SurvivalInfoShape {
-          ?SurvivalInfoShape a ?o . FILTER ((?o = roo:100014))
-        } GROUP BY ?SurvivalInfoShape HAVING (COUNT(*)=1)}
-
-        { SELECT ?SurvivalInfoShape {
-          ?SurvivalInfoShape roo:100027 ?o . FILTER ((?o = uo:UO_0000035))
-        } GROUP BY ?SurvivalInfoShape HAVING (COUNT(*)=1)}
-
-        { SELECT ?SurvivalInfoShape {
-          ?SurvivalInfoShape roo:100042 ?o . FILTER (isLiteral(?o))
-          . FILTER ( ?o > 0 ) 
-        } GROUP BY ?SurvivalInfoShape HAVING (COUNT(*)=1)}
-    } GROUP BY ?PatientShape }
-    FILTER (?PatientShape_c14 = ?PatientShape_c16)
-    OPTIONAL { ?PatientShape roo:100026 ?PatientShape_SurvivalInfoShape_ref0 . FILTER (true && (isIRI(?PatientShape_SurvivalInfoShape_ref0) || isBlank(?PatientShape_SurvivalInfoShape_ref0))) }
-    FILTER (?PatientShape_c1=0 && ?PatientShape_c3=0 && ?PatientShape_c6=0 && ?PatientShape_c9=0 && ?PatientShape_c11=0 && ?PatientShape_c14=0 || ?PatientShape_c1>=1&&?PatientShape_c1<=1 && ?PatientShape_c3>=1&&?PatientShape_c3<=1 && ?PatientShape_c6>=1&&?PatientShape_c6<=1 && ?PatientShape_c9>=1&&?PatientShape_c9<=1 && ?PatientShape_c11>=1&&?PatientShape_c11<=1 && ?PatientShape_c14>=1&&?PatientShape_c14<=1)
+    FILTER (?PatientShape_c1=0 && ?PatientShape_c3=0 && ?PatientShape_c6=0 && ?PatientShape_c9=0 || ?PatientShape_c1>=1&&?PatientShape_c1<=1 && ?PatientShape_c3>=1&&?PatientShape_c3<=1 && ?PatientShape_c6>=1&&?PatientShape_c6<=1 && ?PatientShape_c9>=1&&?PatientShape_c9<=1)
 }
