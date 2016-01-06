@@ -16,8 +16,8 @@ start = <PatientShape>
     roo:100020 @<DiseaseShape>,
     roo:100000 @<AgeShape>,
     roo:100039 IRI,
-#    roo:100028 @<VitalStatusShape>,
-#    roo:100026 @<SurvivalInfoShape>
+    roo:100028 @<VitalStatusShape>,
+    roo:100026 @<SurvivalInfoShape>
 }
 
 <GenderShape> {
