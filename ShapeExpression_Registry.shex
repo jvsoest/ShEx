@@ -33,10 +33,14 @@ start = <PatientShape>
 
 <AgeShape> {
     rdf:type (ncit:C25150),
-    roo:100027 (uo:UO_0000036),
+    roo:100027 @<AgeShapeType>,
     roo:100042 LITERAL
     %js{ return (_.o.lex > 18) %}
     %sparql{ . FILTER ( ?o > 18 ) %}
+}
+
+<AgeShapeType> {
+	rdf:type (uo:UO_0000036)
 }
 
 <VitalStatusShape> {
@@ -45,10 +49,14 @@ start = <PatientShape>
 
 <SurvivalInfoShape> {
     rdf:type (roo:100014),
-    roo:100027 (uo:UO_0000035),
+    roo:100027 @<SurvivalInfoShapeType>,
     roo:100042 LITERAL
     %js{ return (_.o.lex > 0) %}
     %sparql{ . FILTER ( ?o > 0 ) %}
+}
+
+<SurvivalInfoShapeType> {
+	rdf:type (uo:UO_0000035)
 }
 
 <ClinicalTNMShape> {
