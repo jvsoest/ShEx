@@ -30,8 +30,7 @@ start = <http://johanvansoest.nl/shex/PatientShape>
 <DiseaseShape> {
     rdf:type [icd:C20]{1},
 	roo:100243 @<ClinicalTNMShape>,
-	roo:100287 @<PathologicTNMShape>,
-	roo:100041 IRI?
+	roo:100287 @<PathologicTNMShape>
 }
 
 <AgeShapeDiagnosis> {
