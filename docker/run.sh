@@ -1,17 +1,39 @@
-ENDPOINT="http://as-vate-01.ad.maastro.nl/blazegraph/namespace/thunder/sparql"
+#if shape exists (/shape-import-dir is mounted) copy to internal
+if [ -f /shape-import-dir/shape.shex ]; then
+	cp /shape-import-dir/shape.shex /shape.shex
+	cp /shape-import-dir/startShape.uri /startShape.uri
+	cp /shape-import-dir/rootQuery.sparql /rootQuery.sparql
+fi
 
+#Check if endpoint has been given
+if [ -z "$ENDPOINT" ]; then
+	echo "Environtment variable 'ENDPOINT' not set. Application will exit."
+	exit
+fi
+
+startShape="$(cat /startShape.uri)"
+rootQuery="$(cat /rootQuery.sparql)"
+
+#Query for all data in turtle format
 curl  -X POST $ENDPOINT --data-urlencode 'query=CONSTRUCT WHERE { hint:Query hint:analytic "true" . hint:Query hint:constructDistinctSPO "false" . ?s ?p ?o }' -H 'Accept:text/turtle' > data.ttl
-curl  -X POST $ENDPOINT --data-urlencode 'query=PREFIX ncit:<http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?patient (replace(str(?patient), "^.*/", "") AS ?suffix) WHERE { ?patient rdf:type ncit:C16960 } ' -H 'Accept:text/csv' > uris.csv
+#Perform a query to retrieve all patient URIs
+curl  -X POST $ENDPOINT --data-urlencode "query=${rootQuery}" -H 'Accept:text/csv' > uris.csv
 
+#convert CSV to unix line endings if endpoint is on Windows server
 dos2unix uris.csv
 
+#Loop over all patient URIs, and process shape expression
 IFS=","
-while read patient suffix
+while read uri suffix
 do
-	if [ "$patient" = "patient" ]; then 
+	if [ "$uri" = "uri" ]; then 
 		continue
 	fi
 	
 	echo "suffix: $suffix"
-	node_modules/shex/bin/validate -x /shape.shex -d /data.ttl -s http://johanvansoest.nl/shex/PatientShape -n $patient > /output-dir/$suffix.json
+	node_modules/shex/bin/validate -x /shape.shex -d /data.ttl -s $startShape -n $uri > /output-dir/$suffix.json
 done < uris.csv
+
+grep -r "errors" /output-dir > /error_patients.txt
+
+mv /error_patients.txt /output-dir/error_patients.txt

@@ -1,0 +1,1 @@
+PREFIX ncit:<http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?uri (replace(str(?uri), "^.*/", "") AS ?suffix) WHERE { ?uri rdf:type ncit:C16960 }
