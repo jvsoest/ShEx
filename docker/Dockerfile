@@ -10,3 +10,5 @@ RUN mkdir /shape-import-dir
 RUN mkdir /root-query-dir
 RUN mkdir /output-dir
 COPY run.sh /run.sh
+
+CMD ["sh", "run.sh"]
