@@ -3,6 +3,7 @@ if [ -f /shape-import-dir/shape.shex ]; then
 	cp /shape-import-dir/shape.shex /shape.shex
 	cp /shape-import-dir/startShape.uri /startShape.uri
 	cp /shape-import-dir/rootQuery.sparql /rootQuery.sparql
+	echo "Configuration of shape has been saved."
 fi
 
 #Check if endpoint has been given
