@@ -37,7 +37,7 @@ the second line commits this container as a new image (including the configurati
 To run this configured container, you can execute the following line:
 
 ```
-docker run -i --name shexTest -v c:/tmp/out:/output-dir -e ENDPOINT=http://as-vate-01.ad.maastro.nl/blazegraph/namespace/thunder/sparql jvsoest/shex:thunder
+docker run -t --name shexTest -v c:/tmp/out:/output-dir -e ENDPOINT=http://as-vate-01.ad.maastro.nl/blazegraph/namespace/thunder/sparql jvsoest/shex:thunder
 docker rm shexTest
 ```
 
